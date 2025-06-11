@@ -1,4 +1,3 @@
-const card = document.getElementById('bizcard');
-card.addEventListener('click', () => {
-  card.classList.toggle('flipped');
+document.getElementById('card').addEventListener('click', function() {
+  this.classList.toggle('flipped');
 });
