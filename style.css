@@ -1,12 +1,12 @@
 body {
-  background: radial-gradient(ellipse at center, #1a1a1a 0%, #000 100%);
+  background: radial-gradient(ellipse at center, #e0e0e0 0%, #bbb 100%);
   height: 100vh;
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-  color: #fff;
+  color: #222;
 }
 
 .container {
@@ -15,15 +15,42 @@ body {
   align-items: center;
 }
 
+/* Card styling with pop and glow */
 .card {
   width: 400px;
   height: 227px;
   perspective: 1200px;
   margin-bottom: 16px;
-  box-shadow: 0 8px 40px 0 #000a, 0 1.5px 7px 0 #fff1;
   border-radius: 18px;
+  position: relative;
+  transition:
+    box-shadow 0.4s cubic-bezier(.5,-0.15,.5,1.15),
+    transform 0.3s cubic-bezier(.5,-0.15,.5,1.15);
+  box-shadow: 0 10px 32px 0 rgba(0,0,0,0.20),
+              0 2px 18px 0 rgba(0,0,0,0.12),
+              0 0px 0px 4px rgba(70,175,255,0.08);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  outline: none;
 }
 
+/* Pop and glow on hover/tap/focus/flip */
+.card:active,
+.card:focus,
+.card:hover,
+.card.flipped {
+  box-shadow: 0 16px 48px 0 rgba(70,175,255,0.18),
+              0 6px 40px 0 rgba(0,0,0,0.18),
+              0 0px 0px 8px rgba(70,175,255,0.16);
+  transform: scale(1.035) rotateZ(-1deg);
+  border: 1.5px solid #46afff40;
+}
+
+.card.flipped {
+  transform: rotateY(180deg) scale(1.035) rotateZ(1deg);
+}
+
+/* Card face basics */
 .card-face {
   position: absolute;
   width: 100%;
@@ -31,7 +58,7 @@ body {
   backface-visibility: hidden;
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 2px 18px #0008;
+  box-shadow: 0 2px 18px #0004;
   transition: box-shadow 0.3s;
 }
 
@@ -41,19 +68,7 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-}
-
-.card {
-  position: relative;
-  transition: box-shadow 0.4s;
-  cursor: pointer;
-  transform-style: preserve-3d;
-  transition: transform 0.7s cubic-bezier(.5,-0.15,.5,1.15);
-}
-
-.card.flipped {
-  transform: rotateY(180deg);
-  box-shadow: 0 8px 40px 0 #00f9, 0 1.5px 7px 0 #fff5;
+  border-radius: 18px;
 }
 
 .card-back {
@@ -62,10 +77,10 @@ body {
 
 .tap-hint {
   font-size: 1rem;
-  color: #aaa;
+  color: #888;
   margin-top: 10px;
   letter-spacing: 0.08em;
-  text-shadow: 0 2px 8px #0008;
+  text-shadow: 0 2px 8px #fff5;
   animation: pulse 1.6s infinite alternate;
 }
 
