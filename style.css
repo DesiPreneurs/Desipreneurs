@@ -1,101 +1,28 @@
-body {
-  background: linear-gradient(135deg, #5c6bc0 0%, #80cbc4 100%);
-  min-height: 100vh;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-  color: #232323;
-  transition: background 0.7s;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .card {
-  width: 400px;
-  height: 227px;
-  perspective: 1200px;
-  margin-bottom: 22px;
+  width: 200px;
+  height: 300px;
+  perspective: 1000px;
 }
-
 .card-inner {
-  position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.6s cubic-bezier(.4,2,.6,1);
+  transition: transform 0.6s;
   transform-style: preserve-3d;
-  box-shadow: 0 8px 40px 0 rgba(30,40,90,0.18), 0 2px 30px 0 rgba(0,0,0,0.13);
-  border-radius: 24px;
-  background: rgba(255,255,255,0.16);
-  cursor: pointer;
+  position: relative;
 }
 .card.flipped .card-inner {
   transform: rotateY(180deg);
 }
-
-.card-face {
-  position: absolute;
+.card-front, .card-back {
   width: 100%;
   height: 100%;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 2px 18px #0002;
-  background: rgba(255,255,255,0.13);
+  position: absolute;
+  backface-visibility: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  backface-visibility: hidden;
+  font-size: 2em;
 }
-
-.card-front {
-  z-index: 2;
-}
-
 .card-back {
   transform: rotateY(180deg);
-  z-index: 3;
-}
-
-.card-front img,
-.card-back img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 20px;
-}
-
-.tap-hint {
-  font-size: 1.08rem;
-  color: #f2f4fa;
-  margin-top: 20px;
-  letter-spacing: 0.09em;
-  text-shadow: 0 2px 8px #21213a88;
-  background: rgba(170,190,255,0.18);
-  border-radius: 12px;
-  padding: 7px 20px;
-  box-shadow: 0 1px 8px #b5c6d622;
-  animation: pulse 1.4s infinite alternate;
-  user-select: none;
-  border: 1px solid #a1c4fd33;
-}
-
-@keyframes pulse {
-  0% { opacity: 0.55; }
-  100% { opacity: 1; }
-}
-
-@media (max-width: 440px) {
-  .card {
-    width: 95vw;
-    height: 54vw;
-    min-width: 220px;
-    min-height: 120px;
-    max-width: 99vw;
-    max-height: 60vw;
-  }
 }
