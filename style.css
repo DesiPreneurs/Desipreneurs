@@ -20,7 +20,6 @@ body {
 .card {
   width: 400px;
   height: 227px;
-  perspective: 1200px;
   margin-bottom: 22px;
   border-radius: 24px;
   position: relative;
@@ -70,8 +69,10 @@ body {
   transform: scale(1.055); /* Only scale, NO tilt */
 }
 
+/* Remove ALL tilt (no rotateY/rotateZ anywhere!) */
 .card.flipped {
-  transform: rotateY(180deg) scale(1.055); /* Only scale, no tilt */
+  /* No rotateY! Only scale. */
+  transform: scale(1.055);
   box-shadow:
     0 16px 48px 0 rgba(120,180,255,0.22),
     0 6px 40px 0 rgba(0,0,0,0.22),
@@ -79,7 +80,6 @@ body {
   border: 2.5px solid #a1c4fd;
 }
 
-/* Glassmorphism overlay for card face */
 .card-face {
   position: absolute;
   width: 100%;
@@ -103,7 +103,6 @@ body {
   z-index: 5;
 }
 
-/* Card images */
 .card-front img, .card-back img {
   width: 100%;
   height: 100%;
@@ -114,7 +113,8 @@ body {
 }
 
 .card-back {
-  transform: rotateY(180deg);
+  /* No rotateY! */
+  /* If you have back-face code, hide/show with JS or opacity, not transform */
 }
 
 .tap-hint {
@@ -137,7 +137,6 @@ body {
   100% { opacity: 1; }
 }
 
-/* Responsive adjustments */
 @media (max-width: 440px) {
   .card {
     width: 95vw;
