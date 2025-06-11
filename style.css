@@ -1,5 +1,5 @@
 body {
-  background: radial-gradient(ellipse at 60% 40%, #717580 0%, #3b3f47 100%);
+  background: linear-gradient(135deg, #5c6bc0 0%, #80cbc4 100%);
   min-height: 100vh;
   margin: 0;
   display: flex;
@@ -16,105 +16,57 @@ body {
   align-items: center;
 }
 
-/* Aesthetic Card Styling */
 .card {
   width: 400px;
   height: 227px;
+  perspective: 1200px;
   margin-bottom: 22px;
-  border-radius: 24px;
+}
+
+.card-inner {
   position: relative;
-  box-shadow:
-    0 8px 40px 0 rgba(30,40,90,0.18),
-    0 2px 30px 0 rgba(0,0,0,0.13);
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(.4,2,.6,1);
+  transform-style: preserve-3d;
+  box-shadow: 0 8px 40px 0 rgba(30,40,90,0.18), 0 2px 30px 0 rgba(0,0,0,0.13);
+  border-radius: 24px;
   background: rgba(255,255,255,0.16);
-  overflow: visible;
   cursor: pointer;
-  transition:
-    box-shadow 0.5s cubic-bezier(.5,0,.5,1),
-    border 0.3s cubic-bezier(.5,0,.5,1),
-    transform 0.22s cubic-bezier(.5,0,.5,1);
-  outline: none;
-  border: 2.5px solid transparent;
-  background-clip: padding-box, border-box;
 }
-
-.card::before {
-  content: '';
-  pointer-events: none;
-  position: absolute;
-  inset: -5px;
-  border-radius: 28px;
-  z-index: 1;
-  background: linear-gradient(120deg, #a1c4fdbb 0%, #c2e9fbbb 100%);
-  opacity: 0.45;
-  filter: blur(12px);
-  transition: opacity 0.4s;
-}
-
-.card:hover::before,
-.card:focus::before,
-.card.flipped::before {
-  opacity: 0.93;
-}
-
-.card:active,
-.card:focus,
-.card:hover,
-.card.flipped {
-  box-shadow:
-    0 16px 48px 0 rgba(120,180,255,0.22),
-    0 6px 40px 0 rgba(0,0,0,0.22),
-    0 0 0 12px #a1c4fd33;
-  border: 2.5px solid #a1c4fd;
-  transform: scale(1.055); /* Only scale, NO tilt */
-}
-
-/* Remove ALL tilt (no rotateY/rotateZ anywhere!) */
-.card.flipped {
-  /* No rotateY! Only scale. */
-  transform: scale(1.055);
-  box-shadow:
-    0 16px 48px 0 rgba(120,180,255,0.22),
-    0 6px 40px 0 rgba(0,0,0,0.22),
-    0 0 0 12px #a1c4fd33;
-  border: 2.5px solid #a1c4fd;
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
 }
 
 .card-face {
   position: absolute;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden;
   border-radius: 20px;
   overflow: hidden;
-  z-index: 3;
   box-shadow: 0 2px 18px #0002;
-  backdrop-filter: blur(3.5px) saturate(140%);
   background: rgba(255,255,255,0.13);
-  transition: box-shadow 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
 }
 
-.card-face::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(120deg,rgba(255,255,255,0.19) 40%,rgba(255,255,255,0.09) 100%);
-  pointer-events: none;
-  z-index: 5;
-}
-
-.card-front img, .card-back img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 20px;
+.card-front {
   z-index: 2;
 }
 
 .card-back {
-  /* No rotateY! */
-  /* If you have back-face code, hide/show with JS or opacity, not transform */
+  transform: rotateY(180deg);
+  z-index: 3;
+}
+
+.card-front img,
+.card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
 }
 
 .tap-hint {
